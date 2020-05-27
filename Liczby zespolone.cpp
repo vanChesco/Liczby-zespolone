@@ -2,8 +2,8 @@
 
 int main()
 {
-	complex C(3, 4), D(4, 5), 
-			suma(0, 0), iloraz(0, 0), roznica(0, 0), iloczyn(0, 0);
+	complexA C(3, 4), D(4, 5), 
+			suma, iloraz, roznica, iloczyn;
 
 /*	std::cout << "Liczba pierwsza:\n\nPodaj czesc rzeczywista: ";
 	std::cin >> C.r;
@@ -30,11 +30,11 @@ int main()
 	roznica = C - D;
 	iloczyn = C / D;
 
-	std::cout	<< "\n\n\tWynik sumowania:\t" << suma.algeb()
-				<< "\n\tWynik mnozenia\t\t"	<< iloraz.algeb()
-				<< "\n\tWynik odejmowania\t"	<< roznica.algeb()
-				<< "\n\tWynik dzielenia\t\t " << iloczyn.algeb() << '\n'
-				<< "\n\tPostac wykladnicza\t"	<< C.expon() << '\n'
+	std::cout	<< "\n\n\tWynik sumowania:\t" << suma.show()
+				<< "\n\tWynik mnozenia\t\t"	<< iloraz.show()
+				<< "\n\tWynik odejmowania\t"	<< roznica.show()
+				<< "\n\tWynik dzielenia\t\t " << iloczyn.show() << '\n'
+				<< "\n\tPostac wykladnicza\t"	<< C.show() << '\n'
 				<< "\n";
 
 	int z;
@@ -42,6 +42,19 @@ int main()
 
 	std::cout << "\tPo konwersji do int: " << z << "\n\n";
 
+
+	complexE S(3, 4), R(4, 5),
+		mnozenie, dzielenie;
+
+	mnozenie = S * R;
+	dzielenie = S / R;
+
+	std::cout << "\tMnozenie postaci wykladniczej:\t\t" << mnozenie.show() << '\n';
+	std::cout << "\tDzielenie postaci wykladniczej:\t\t" << dzielenie.show() << '\n';
+
+//	D = S;
+//	std::cout << D.show() << '\n';
+	
 	return 0;
 }
 

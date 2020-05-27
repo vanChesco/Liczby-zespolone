@@ -4,32 +4,47 @@
 #include <cmath>
 
 const double M_PI = acos(-1);
+class complexE;
 
-class complex																					// klasa liczby zespolonej
+
+//todo///////////////////////////////////////////////////////////////////////////////////////////////////
+//todo////////////////////// POSTAC ALGEBRAICZNA ////////////////////////////////////////////////////////
+//todo///////////////////////////////////////////////////////////////////////////////////////////////////
+
+class complexA																	// klasa liczby zespolonej
 {
 public:
 
-	double r;														// czesc rzeczywista postaci algebraicznej
-	double i;														// czesc urojona postaci algebraicznej
-	double Z = pow(r * r + i * i, 0.5);								// czesc rzeczywista postaci wykladniczej
-	double fi = (360 / (2 * M_PI)) * atan((i / r));					// czesc urojona postaci wykladniczej
+	double r;																	// czesc rzeczywista postaci algebraicznej
+	double i;																	// czesc urojona postaci algebraicznej
+//	double Z = pow(r * r + i * i, 0.5);											// czesc rzeczywista postaci wykladniczej
+//	double fi = (360 / (2 * M_PI)) * atan((i / r));								// czesc urojona postaci wykladniczej
 
-	complex(double R, double I) : r(R), i(I) {};													// Zwykly konstruktor obiektu klasy complex (liczba zespolona)
-	complex(double R) : r(R), i(0) { std::cout << "konwersja\n"; };								// todo Konstruktor konwerujacy typ float do typu complex - dzieki temu mozliwe jest rzutowanie typu
+	complexA(void) : r(0), i(0) {};												// Konstruktor domyslny
+	complexA(double R, double I) : r(R), i(I) {};								// Zwykly konstruktor obiektu klasy complex (liczba zespolona)
+	complexA(double R) : r(R), i(0) { std::cout << "konwersja\n"; };			// todo Konstruktor konwerujacy typ float do typu complex - dzieki temu mozliwe jest rzutowanie typu
+	complexA(const complexE& AA) : r(AA.z * tan(AA.f)), i(AA.z / tan(AA.f)) {};
 
-	operator int() 																				// todo Funkcja konwertujaca do typu wbudowanego
+//	friend complexE::complexE(complexA& A);
+
+	operator int() 																// todo Funkcja konwertujaca do typu wbudowanego
 	{
 		return (int)r;
 	};
 
-	complex operator*=(complex A);
-	complex operator/=(complex A);
+	complexA operator*=(complexA A);
+	complexA operator/=(complexA A);
 
-	std::string algeb();
-	std::string expon();
+	std::string show();
 };
 
-std::string complex::algeb()
+//complexA::complexA(const complexE& A)
+//{
+//	r = A.z *tan(A.f);
+//	i = A.z / tan(A.f);
+//};
+
+std::string complexA::show()
 {
 	std::string value;
 
@@ -40,16 +55,10 @@ std::string complex::algeb()
 	return value;
 }
 
-std::string complex::expon()
+
+complexA operator+(complexA A, complexA B)											//todo Przeladowanie operatora dodawania
 {
-	return std::to_string(Z) + " e^" + std::to_string(fi);
-}
-
-
-
-complex operator+(complex A, complex B)															//todo Przeladowanie operatora dodawania
-{
-	complex sum(0, 0);
+	complexA sum;
 
 	sum.r = A.r + B.r;
 	sum.i = A.i + B.i;
@@ -57,9 +66,9 @@ complex operator+(complex A, complex B)															//todo Przeladowanie opera
 	return sum;
 };
 
-complex operator-(complex A, complex B)															//todo Przeladowanie operatora dodawania
+complexA operator-(complexA A, complexA B)											//todo Przeladowanie operatora dodawania
 {
-	complex diff(0, 0);
+	complexA diff;
 
 	diff.r = A.r - B.r;
 	diff.i = A.i - B.i;
@@ -67,9 +76,9 @@ complex operator-(complex A, complex B)															//todo Przeladowanie opera
 	return diff;
 };
 
-complex operator*(complex A, complex B)															//todo Przeladowanie operatora mnozenia
+complexA operator*(complexA A, complexA B)											//todo Przeladowanie operatora mnozenia
 {
-	complex mlt(0, 0);
+	complexA mlt;
 
 	mlt.r = A.r * B.r - A.i * B.i;
 	mlt.i = A.i * B.r + A.r * B.i;
@@ -77,9 +86,9 @@ complex operator*(complex A, complex B)															//todo Przeladowanie opera
 	return mlt;
 }
 
-complex  complex::operator*=(complex A)
+complexA  complexA::operator*=(complexA A)
 {
-	complex mlt(r, i);
+	complexA mlt(r, i);
 
 	mlt.r = A.r * r - A.i * i;
 	mlt.i = A.i * r + A.r * i;
@@ -90,9 +99,9 @@ complex  complex::operator*=(complex A)
 	return mlt;
 }
 
-complex operator/(complex A, complex B)															//todo Przeladowanie operatora dzielenia
+complexA operator/(complexA A, complexA B)											//todo Przeladowanie operatora dzielenia
 {
-	complex div(0, 0);
+	complexA div;
 
 	div.r = (A.r * B.r + A.i * B.i) / (B.r * B.r + B.i * B.i);
 	div.i = (A.i * B.r - A.r * B.i) / (B.r * B.r + B.i * B.i);
@@ -100,9 +109,9 @@ complex operator/(complex A, complex B)															//todo Przeladowanie opera
 	return div;
 }
 
-complex  complex::operator/=(complex A)
+complexA  complexA::operator/=(complexA A)
 {
-	complex div(r, i);
+	complexA div(r, i);
 
 	div.r = (r * A.r + i * A.i) / (A.r * A.r + A.i * A.i);
 	div.i = (i * A.r - r * A.i) / (A.r * A.r + A.i * A.i);
@@ -111,4 +120,94 @@ complex  complex::operator/=(complex A)
 	i = div.i;
 
 	return div;
+}
+
+
+
+//todo///////////////////////////////////////////////////////////////////////////////////////////////////
+//todo////////////////////// POSTAC WYKLADNICZA /////////////////////////////////////////////////////////
+//todo///////////////////////////////////////////////////////////////////////////////////////////////////
+
+class complexE
+{
+public:
+
+	double z;															// modul liczby zespolonej
+	double f;															// faza liczby zespolonej
+
+	complexE(double z, double f) : z(z), f(f) {};						// Konstruktor liczby zespolonej
+	complexE(double z) : z(z), f(0) {};									// Konstruktor konwerujacy liczbe rzeczywista na zespolona
+	complexE(void) : z(0), f(0) {};
+//	complexE(complexA& A);
+
+	friend complexA::complexA(const complexE& AA);
+
+	complexE operator*=(complexE A);									// przeladowanie operatora
+	complexE operator/=(complexE A);									// przeladowanie operatora
+	void operator=(complexE A);											// przeladowanie operatora
+
+
+	std::string show();
+};
+
+//complexE::complexE(complexA& A) : z(pow(A.r* A.r + A.i * A.i, 0.5)), f(A.i/A.r) {}
+
+//complexE operator+(complexE A, complexE B)
+
+
+complexE operator*(complexE A, complexE B)
+{
+	complexE mlt;
+
+	mlt.z = A.z * B.z;
+	mlt.f = A.f + B.f;
+
+	return mlt;
+}
+
+complexE complexE::operator*=(complexE A)
+{
+	complexE mlt;
+
+	mlt.z = A.z * z;
+	mlt.f = A.f + f;
+
+	z = mlt.z;
+	f = mlt.f;
+
+	return mlt;
+}
+
+complexE operator/(complexE A, complexE B)
+{
+	complexE div;
+
+	div.z = A.z / B.z;
+	div.f = A.f - B.f;
+
+	return div;
+}
+
+complexE complexE::operator/=(complexE A)
+{
+	complexE div;
+
+	div.z = z / A.z;
+	div.f = f - A.f;
+
+	z = div.z;
+	f = div.f;
+
+	return div;
+}
+
+void complexE::operator=(complexE A)
+{
+	z = A.z;
+	f = A.f;
+}
+
+std::string complexE::show()
+{
+	return std::to_string(z) + " e^" + std::to_string(f);
 }

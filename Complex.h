@@ -54,7 +54,7 @@ public:
 	complexE(const complexA& A);
 
 //	friend complexA::complexA(const complexE& AA);
-	operator float();
+	operator double();
 
 	complexE operator*=(complexE A);									// przeladowanie operatora
 	complexE operator/=(complexE A);									// przeladowanie operatora

@@ -116,11 +116,6 @@ int main()
 
 
 
-
-
-
-
-
 //	complexA C(3, 4), D(4, 5), 
 //			suma, iloraz, roznica, iloczyn;
 
@@ -175,5 +170,3 @@ int main()
 	*/
 	return 0;
 }
-
-

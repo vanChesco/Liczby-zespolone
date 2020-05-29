@@ -59,9 +59,9 @@ complexE::complexE(double z) : z(z), f(0) {};
 complexE::complexE(void) : z(0), f(0) {};
 complexE::complexE(const complexA& A) : z(pow(A.r * A.r + A.i * A.i, 0.5)), f(atan(A.i / A.r)) {};
 
-complexE::operator float()
+complexE::operator double()
 {
-	return (float)z;
+	return (double)z;
 };
 
 

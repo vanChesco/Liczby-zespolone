@@ -1,100 +1,35 @@
 ﻿#include "Complex.h"
 
-
-complexA operator+(complexA A, complexA B)											//todo Przeladowanie operatora dodawania
-{
-	complexA sum;
-
-	sum.r = A.r + B.r;
-	sum.i = A.i + B.i;
-
-	return sum;
-};
-
-complexA operator-(complexA A, complexA B)											//todo Przeladowanie operatora dodawania
-{
-	complexA diff;
-
-	diff.r = A.r - B.r;
-	diff.i = A.i - B.i;
-
-	return diff;
-};
-
-complexA operator*(complexA A, complexA B)											//todo Przeladowanie operatora mnozenia
-{
-	complexA mlt;
-
-	mlt.r = A.r * B.r - A.i * B.i;
-	mlt.i = A.i * B.r + A.r * B.i;
-
-	return mlt;
-}
-
-complexA operator/(complexA A, complexA B)											//todo Przeladowanie operatora dzielenia
-{
-	complexA div;
-
-	div.r = (A.r * B.r + A.i * B.i) / (B.r * B.r + B.i * B.i);
-	div.i = (A.i * B.r - A.r * B.i) / (B.r * B.r + B.i * B.i);
-
-	return div;
-}
-
-
-void complexE::operator=(complexE A)
-{
-	z = A.z;
-	f = A.f;
-}
-
-
-complexE operator/(complexE A, complexE B)
-{
-	complexE div;
-
-	div.z = A.z / B.z;
-	div.f = A.f - B.f;
-
-	return div;
-}
-
-
-complexE operator+(complexE A, complexE B)
-{
-	complexE sum;
-
-	sum.z = pow(A.z * A.z + B.z * B.z + 2 * A.z * B.z * cos(A.f - B.f), 0.5);
-	sum.f = atan((B.z * sin(B.f) + A.z * sin(A.f)) / (A.z * cos(A.f) + B.z * cos(B.f)));
-
-	return sum;
-}
-
-complexE operator-(complexE A, complexE B)
-{
-	complexE sum;
-
-	sum.z = pow(A.z * A.z + B.z * B.z - 2 * A.z * B.z * cos(A.f - B.f), 0.5);
-	sum.f = atan((B.z * sin(B.f) - A.z * sin(A.f)) / (A.z * cos(A.f) - B.z * cos(B.f)));
-
-	return sum;
-}
-complexE operator*(complexE A, complexE B)
-{
-	complexE mlt;
-
-	mlt.z = A.z * B.z;
-	mlt.f = A.f + B.f;
-
-	return mlt;
-}
-
 int main()
 {
-	complexA A(8, 14), B(4,5), sumaA, sconv;
-	complexE Y, Z, sumaE;
+	complexA A(8, 14), B(4,5), sumaA(2,0), sconv;
+	complexE Y, Z, sumaE(3, 0);
 
-	sumaA = A - B;
+	sumaE = A + B;
+
+	A = !A;
+
+	std::cout << sumaE.show() << '\n';
+
+
+
+
+
+
+
+
+
+
+
+	
+	for (int i=0; i<720; i++)
+	{
+		sumaE.f+=0.01;
+		sconv = sumaE;
+		std::cout << i << ": " << sumaE.z << "e^" << sumaE.f << "\t| "<< 180*sumaE.f/M_PI << " | " << "\t=> " << sconv.r << " + i" << sconv.i << "\n";
+	}
+
+	/*sumaA = A - B;
 
 	Y = A;
 	Z = B;
@@ -104,7 +39,7 @@ int main()
 
 	std::cout << sumaA.show() << "\n\n" << sconv.show() << "\n\n";
 
-
+	*/
 
 
 

@@ -1,28 +1,70 @@
 #include "Complex.h"
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 complexA::complexA(void) : r(0), i(0) {};
 complexA::complexA(double R, double I) : r(R), i(I) {};
 complexA::complexA(double R) : r(R), i(0) {};
-complexA::complexA(const complexE& AA) : r(AA.z* cos(AA.f)), i(AA.z * sin(AA.f)) {};
+complexA::complexA(const complexE& AA) : r(AA.z * cos(AA.f)), i(AA.z * sin(AA.f)) {};
 
 complexA::operator double()
 {
 	return (double)r;
-};
-
-
-std::string complexA::show()
-{
-	std::string value;
-
-	value = std::to_string(r);
-	if (i < 0) value += " - " + std::to_string(-i) + "i";
-	else value += " + " + std::to_string(i) + "i";
-
-	return value;
 }
 
+complexA complexA::operator!()																	//todo operator zwracajacy liczbe sprzezona
+{
+	complexA bound;
 
+	bound.r = r;
+	bound.i = -i;
+
+	return bound;
+}
+
+complexA complexA::operator+(complexA B)														//todo Przeladowanie operatora dodawania
+{
+	complexA sum;
+
+	sum.r = r + B.r;
+	sum.i = i + B.i;
+
+	return sum;
+}
+
+complexA complexA::operator-(complexA B)														//todo Przeladowanie operatora dodawania
+{
+	complexA diff;
+
+	diff.r = r - B.r;
+	diff.i = i - B.i;
+
+	return diff;
+}
+
+complexA complexA::operator*(complexA B)														//todo Przeladowanie operatora mnozenia
+{
+	complexA mlt;
+
+	mlt.r = r * B.r - i * B.i;
+	mlt.i = i * B.r + r * B.i;
+
+	return mlt;
+}
+
+complexA complexA::operator/(complexA B)														//todo Przeladowanie operatora dzielenia
+{
+	complexA div;
+
+	div.r = (r * B.r + i * B.i) / (B.r * B.r + B.i * B.i);
+	div.i = (i * B.r - r * B.i) / (B.r * B.r + B.i * B.i);
+
+	return div;
+}
 
 complexA complexA::operator*=(complexA A)
 {
@@ -37,7 +79,7 @@ complexA complexA::operator*=(complexA A)
 	return mlt;
 }
 
-complexA  complexA::operator/=(complexA A)
+complexA complexA::operator/=(complexA A)
 {
 	complexA div(r, i);
 
@@ -50,8 +92,21 @@ complexA  complexA::operator/=(complexA A)
 	return div;
 }
 
+std::string complexA::show()
+{
+	std::string value;
 
+	value = std::to_string(r);
+	if (i < 0) value += " - " + std::to_string(-i) + "i";
+	else value += " + " + std::to_string(i) + "i";
 
+	return value;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 complexE::complexE(double z, double f) : z(z), f(f) {};
@@ -64,6 +119,51 @@ complexE::operator double()
 	return (double)z;
 };
 
+void complexE::operator=(complexE A)
+{
+	z = A.z;
+	f = A.f;
+}
+
+complexE complexE::operator/(complexE B)
+{
+	complexE div;
+
+	div.z = z / B.z;
+	div.f = f - B.f;
+
+	return div;
+}
+
+complexE complexE::operator+(complexE B)
+{
+	complexE sum;
+
+	sum.z = pow(z * z + B.z * B.z + 2 * z * B.z * cos(f - B.f), 0.5);
+	sum.f = atan((B.z * sin(B.f) + z * sin(f)) / (z * cos(f) + B.z * cos(B.f)));
+
+	return sum;
+}
+
+complexE complexE::operator-(complexE B)
+{
+	complexE sum;
+
+	sum.z = pow(z * z + B.z * B.z - 2 * z * B.z * cos(f - B.f), 0.5);
+	sum.f = atan((B.z * sin(B.f) - z * sin(f)) / (z * cos(f) - B.z * cos(B.f)));
+
+	return sum;
+}
+
+complexE complexE::operator*(complexE B)
+{
+	complexE mlt;
+
+	mlt.z = z * B.z;
+	mlt.f = f + B.f;
+
+	return mlt;
+}
 
 complexE complexE::operator*=(complexE A)
 {
@@ -78,7 +178,6 @@ complexE complexE::operator*=(complexE A)
 	return mlt;
 }
 
-
 complexE complexE::operator/=(complexE A)
 {
 	complexE div;
@@ -91,7 +190,6 @@ complexE complexE::operator/=(complexE A)
 
 	return div;
 }
-
 
 std::string complexE::show()
 {

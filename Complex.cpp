@@ -193,5 +193,5 @@ complexE complexE::operator/=(complexE A)
 
 std::string complexE::show()
 {
-	return std::to_string(z) + " e^" + std::to_string(f);
+	return std::to_string(float(z)) + " e^" + std::to_string((float)f);
 }

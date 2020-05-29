@@ -2,7 +2,7 @@
 
 int main()
 {
-	complexA A(8, 14), B(4,5), sumaA(2,0), sconv;
+	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
 	complexE Y, Z, sumaE(3, 0);
 
 	sumaE = A + B;

@@ -21,13 +21,13 @@ int main()
 
 
 
-	
+/*
 	for (int i=0; i<720; i++)
 	{
 		sumaE.f+=0.01;
 		sconv = sumaE;
 		std::cout << i << ": " << sumaE.z << "e^" << sumaE.f << "\t| "<< 180*sumaE.f/M_PI << " | " << "\t=> " << sconv.r << " + i" << sconv.i << "\n";
-	}
+	}*/
 
 	/*sumaA = A - B;
 

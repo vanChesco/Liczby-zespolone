@@ -1,15 +1,14 @@
 // 
-// KLASA LICZB ZESPOLONYCH
+//		KLASA LICZB ZESPOLONYCH
 //
-// Obiekty typu complexA sa liczbami zespolonymi w zapisie algebraicznym
-// Obiekty typu complexE, to postac wykladnicza
-// 
-// W klasach zostaly przygotowane konstruktory konwertujace, dzieki czemu przypisanie liczby w postaci wykladniczej do algebraicznej (A = E) powoduje od razu konwersje miedzy tymi typami
-// 
-// operatory dzialan zostaly przeciazone tak, aby podstawowe operacje na liczbach zespolonych mozna bylo wykonywac za pomoca operatorow +, -, *, /, *=, /= oraz !, ktory sluzy do utworzenia liczby sprzezonej
+//		Obiekty typu complexA sa liczbami zespolonymi w zapisie algebraicznym
+//		Obiekty typu complexE, to postac wykladnicza
 //
-// wartosci kata fazy sa przeliczane w radianach
-
+//		1. W klasach zostaly przygotowane konstruktory konwertujace, dzieki czemu przypisanie liczby w postaci wykladniczej do algebraicznej (A = E) powoduje od razu konwersje miedzy tymi typami
+//		2. operatory dzialan zostaly przeciazone tak, aby podstawowe operacje na liczbach zespolonych mozna bylo wykonywac za pomoca operatorow +, -, *, /, *=, /= oraz !, ktory sluzy do utworzenia liczby sprzezonej
+//		3. wartosci kata fazy sa przeliczane w radianach
+//		4. dla liczb w postaci wykladniczej, operator ~ zwraca liczbe z wartoscia kata zawezona do zakresu (0 - 2pi)
+//
 
 #pragma once
 
@@ -74,6 +73,8 @@ public:
 	complexE operator-(complexE B);										// Przeladowanie operatora roznicy
 	complexE operator*(complexE B);										// Przeladowanie operatora iloczynu
 	complexE operator/(complexE B);										// Przeladowanie operatora ilorazu
+	complexE operator!();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona)
+	complexE operator~();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona z ograniczeniem kata do zakresu 0-2pi)
 	complexE operator*=(complexE A);									// Przeladowanie operatora *=
 	complexE operator/=(complexE A);									// Przeladowanie operatora /=
 	void operator=(complexE A);											// Przeladowanie operatora przypisania

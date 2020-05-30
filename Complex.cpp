@@ -117,7 +117,27 @@ complexE::complexE(const complexA& A) : z(pow(A.r * A.r + A.i * A.i, 0.5)), f(at
 complexE::operator double()
 {
 	return (double)z;
-};
+}
+
+complexE complexE::operator!()																	//todo operator zwracajacy liczbe sprzezona
+{
+	complexE bound;
+
+	bound.z = z;
+	bound.f = -f;
+
+	return bound;
+}
+
+complexE complexE::operator~()																	// operator zawezajacy zakres fazy do (0 - 2pi)
+{
+	complexE bound;
+
+	bound.z = z;
+	bound.f = fmod(f, (2*M_PI));
+
+	return bound;
+}
 
 void complexE::operator=(complexE A)
 {

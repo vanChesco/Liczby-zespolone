@@ -5,11 +5,14 @@ int main()
 	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
 	complexE Y, Z, sumaE(3, 0);
 
-	sumaE = A + B;
+	sumaE = sumaA;
 
-	A = !A;
-
-	std::cout << sumaE.show() << '\n';
+	for (int i = 0; i < 200; i++)
+	{
+		Y = ~sumaE;
+		std::cout << i << ": " << sumaE.show() << " | " << Y.show() << '\n';
+		sumaE.f += .01 *4* M_PI;
+	}
 
 
 

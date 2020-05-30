@@ -73,6 +73,7 @@ public:
 	complexE operator-(complexE B);										// Przeladowanie operatora roznicy
 	complexE operator*(complexE B);										// Przeladowanie operatora iloczynu
 	complexE operator/(complexE B);										// Przeladowanie operatora ilorazu
+	complexE operator^(double p);										// Przeladowanie operatora potegi dla liczby zespolonej
 	complexE operator!();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona)
 	complexE operator~();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona z ograniczeniem kata do zakresu 0-2pi)
 	complexE operator*=(complexE A);									// Przeladowanie operatora *=

@@ -3,17 +3,12 @@
 int main()
 {
 	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
-	complexE Y, Z, sumaE(3, 0);
+	complexE Y, Z(3, 3), sumaE(3, 0);
 
-	sumaE = sumaA;
+	Z *= (!Z * Z - Z / Z) ^ 0.5;
+	A /= ~Z;
 
-	for (int i = 0; i < 200; i++)
-	{
-		Y = ~sumaE;
-		std::cout << i << ": " << sumaE.show() << " | " << Y.show() << '\n';
-		sumaE.f += .01 *4* M_PI;
-	}
-
+	std::cout << Z.show() << '\n' << A.show() << "\n\n";
 
 
 

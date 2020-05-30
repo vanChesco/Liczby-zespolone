@@ -155,6 +155,16 @@ complexE complexE::operator/(complexE B)
 	return div;
 }
 
+complexE complexE::operator^(double n)
+{
+	complexE pwr;
+
+	pwr.z = pow(z, n);
+	pwr.f = n * f;
+
+	return pwr;
+}
+
 complexE complexE::operator+(complexE B)
 {
 	complexE sum;
@@ -213,5 +223,5 @@ complexE complexE::operator/=(complexE A)
 
 std::string complexE::show()
 {
-	return std::to_string(float(z)) + " e^" + std::to_string((float)f);
+	return std::to_string(float(z)) + "e^" + std::to_string((float)f) + "i";
 }

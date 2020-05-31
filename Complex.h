@@ -35,6 +35,7 @@ public:
 	complexA(double R, double I);										// Zwykly konstruktor obiektu klasy complex (liczba zespolona)
 	complexA(double R);													// todo Konstruktor konwerujacy typ double do typu complex - dzieki temu mozliwe jest rzutowanie typu
 	complexA(const complexE& AA);										// Konstruktor konwertujacy postac wykladnicza do algebraicznej
+	~complexA();
 
 	operator double();													// todo Funkcja konwertujaca do typu wbudowanego
 
@@ -45,6 +46,7 @@ public:
 	complexA operator!();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona)
 	complexA operator*=(complexA A);									// Przeladowanie operatora *=
 	complexA operator/=(complexA A);									// Przeladowanie operatora /=
+	complexA operator=(complexA A);										// Operator przypisania (wielokrotnego - A=B=C=D dzieki zwracanemu obiektowi wskaznikiem *this)
 
 	std::string show();													// Funkcja zwracajaca liczbe w postaci tekstowej
 };
@@ -66,6 +68,7 @@ public:
 	complexE(double z);													// Konstruktor konwerujacy liczbe rzeczywista na zespolona
 	complexE(void);														// Konstruktor domyslny
 	complexE(const complexA& A);										// Konstruktor konwertujacy postac algebraiczna do wykladniczej
+	~complexE();
 
 	operator double();
 
@@ -78,7 +81,7 @@ public:
 	complexE operator~();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona z ograniczeniem kata do zakresu 0-2pi)
 	complexE operator*=(complexE A);									// Przeladowanie operatora *=
 	complexE operator/=(complexE A);									// Przeladowanie operatora /=
-	void operator=(complexE A);											// Przeladowanie operatora przypisania
+	complexE operator=(complexE A);										// Przeladowanie operatora przypisania (operator w zasadzie moglby byc void, bo i tak zapisuje zmiany bezposrednio w skladnikach obiektu, ale dzieki sprecyzowaniu typu, mozna od razu zwrocic obiekt wskaznikim *this)
 
 	std::string show();													// Funkcja zwracajaca liczbe w postaci tekstowej
 };

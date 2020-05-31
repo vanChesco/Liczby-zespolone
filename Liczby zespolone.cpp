@@ -5,10 +5,14 @@ int main()
 	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
 	complexE Y, Z(3, 3), sumaE(3, 0);
 
-	Z *= (!Z * Z - Z / Z) ^ 0.5;
-	A /= ~Z;
+	sumaA = A * B;
 
-	std::cout << Z.show() << '\n' << A.show() << "\n\n";
+	Y = A; 
+	Z = B;
+
+	sconv = Y *= Z;
+
+	std::cout << sumaA.show() << '\n' << sconv.show() << "\n\n";
 
 
 

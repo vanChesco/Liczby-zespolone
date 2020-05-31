@@ -6,10 +6,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-complexA::complexA(void) : r(0), i(0) {};
-complexA::complexA(double R, double I) : r(R), i(I) {};
-complexA::complexA(double R) : r(R), i(0) {};
-complexA::complexA(const complexE& AA) : r(AA.z * cos(AA.f)), i(AA.z * sin(AA.f)) {};
+complexA::complexA(void) : r(0), i(0) {}
+complexA::complexA(double R, double I) : r(R), i(I) {}
+complexA::complexA(double R) : r(R), i(0) {}
+complexA::complexA(const complexE& AA) : r(AA.z * cos(AA.f)), i(AA.z * sin(AA.f)) {}
+complexA::~complexA() {}
 
 complexA::operator double()
 {
@@ -18,12 +19,12 @@ complexA::operator double()
 
 complexA complexA::operator!()																	//todo operator zwracajacy liczbe sprzezona
 {
-	complexA bound;
+	complexA bnd;
 
-	bound.r = r;
-	bound.i = -i;
+	bnd.r = r;
+	bnd.i = -i;
 
-	return bound;
+	return bnd;
 }
 
 complexA complexA::operator+(complexA B)														//todo Przeladowanie operatora dodawania
@@ -70,26 +71,26 @@ complexA complexA::operator*=(complexA A)
 {
 	complexA mlt(r, i);
 
-	mlt.r = A.r * r - A.i * i;
-	mlt.i = A.i * r + A.r * i;
+	r = A.r * r - A.i * i;
+	i = A.i * r + A.r * i;
 
-	r = mlt.r;
-	i = mlt.i;
-
-	return mlt;
+	return *this;
 }
 
 complexA complexA::operator/=(complexA A)
 {
-	complexA div(r, i);
+	r = (r * A.r + i * A.i) / (A.r * A.r + A.i * A.i);
+	i = (i * A.r - r * A.i) / (A.r * A.r + A.i * A.i);
 
-	div.r = (r * A.r + i * A.i) / (A.r * A.r + A.i * A.i);
-	div.i = (i * A.r - r * A.i) / (A.r * A.r + A.i * A.i);
+	return *this;
+}
 
-	r = div.r;
-	i = div.i;
+complexA complexA::operator=(complexA A)
+{
+	r = A.r;
+	i = A.i;
 
-	return div;
+	return *this;
 }
 
 std::string complexA::show()
@@ -109,10 +110,11 @@ std::string complexA::show()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-complexE::complexE(double z, double f) : z(z), f(f) {};
-complexE::complexE(double z) : z(z), f(0) {};
-complexE::complexE(void) : z(0), f(0) {};
-complexE::complexE(const complexA& A) : z(pow(A.r * A.r + A.i * A.i, 0.5)), f(atan(A.i / A.r)) {};
+complexE::complexE(double z, double f) : z(z), f(f) {}
+complexE::complexE(double z) : z(z), f(0) {}
+complexE::complexE(void) : z(0), f(0) {}
+complexE::complexE(const complexA& A) : z(pow(A.r * A.r + A.i * A.i, 0.5)), f(atan(A.i / A.r)) {}
+complexE::~complexE() {}
 
 complexE::operator double()
 {
@@ -121,28 +123,30 @@ complexE::operator double()
 
 complexE complexE::operator!()																	//todo operator zwracajacy liczbe sprzezona
 {
-	complexE bound;
+	complexE bnd;
 
-	bound.z = z;
-	bound.f = -f;
+	bnd.z = z;
+	bnd.f = -f;
 
-	return bound;
+	return bnd;
 }
 
 complexE complexE::operator~()																	// operator zawezajacy zakres fazy do (0 - 2pi)
 {
-	complexE bound;
+	complexE rng;
+	
+	rng.z = z;
+	rng.f = fmod(f, (2*M_PI));
 
-	bound.z = z;
-	bound.f = fmod(f, (2*M_PI));
-
-	return bound;
+	return rng;
 }
 
-void complexE::operator=(complexE A)
+complexE complexE::operator=(complexE A)
 {
 	z = A.z;
 	f = A.f;
+
+	return *this;									// dzieki temu zwracaniu wartosci, mozliwe jest wykonanie operacji wielokrotnego przypisania A=B=C=D
 }
 
 complexE complexE::operator/(complexE B)
@@ -177,12 +181,12 @@ complexE complexE::operator+(complexE B)
 
 complexE complexE::operator-(complexE B)
 {
-	complexE sum;
+	complexE diff;
 
-	sum.z = pow(z * z + B.z * B.z - 2 * z * B.z * cos(f - B.f), 0.5);
-	sum.f = atan((B.z * sin(B.f) - z * sin(f)) / (z * cos(f) - B.z * cos(B.f)));
+	diff.z = pow(z * z + B.z * B.z - 2 * z * B.z * cos(f - B.f), 0.5);
+	diff.f = atan((B.z * sin(B.f) - z * sin(f)) / (z * cos(f) - B.z * cos(B.f)));
 
-	return sum;
+	return diff;
 }
 
 complexE complexE::operator*(complexE B)
@@ -197,28 +201,18 @@ complexE complexE::operator*(complexE B)
 
 complexE complexE::operator*=(complexE A)
 {
-	complexE mlt;
+	z = A.z * z;
+	f = A.f + f;
 
-	mlt.z = A.z * z;
-	mlt.f = A.f + f;
-
-	z = mlt.z;
-	f = mlt.f;
-
-	return mlt;
+	return *this;
 }
 
 complexE complexE::operator/=(complexE A)
 {
-	complexE div;
+	z = z / A.z;
+	f = f - A.f;
 
-	div.z = z / A.z;
-	div.f = f - A.f;
-
-	z = div.z;
-	f = div.f;
-
-	return div;
+	return *this;
 }
 
 std::string complexE::show()

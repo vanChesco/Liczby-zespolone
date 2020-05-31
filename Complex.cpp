@@ -85,6 +85,22 @@ complexA complexA::operator/=(complexA A)
 	return *this;
 }
 
+complexA complexA::operator+=(complexA B)														//todo Przeladowanie operatora dodawania
+{
+	r = r + B.r;
+	i = i + B.i;
+
+	return *this;
+}
+
+complexA complexA::operator-=(complexA B)														//todo Przeladowanie operatora dodawania
+{
+	r = r - B.r;
+	i = i - B.i;
+
+	return *this;
+}
+
 complexA complexA::operator=(complexA A)
 {
 	r = A.r;
@@ -211,6 +227,32 @@ complexE complexE::operator/=(complexE A)
 {
 	z = z / A.z;
 	f = f - A.f;
+
+	return *this;
+}
+
+complexE complexE::operator+=(complexE B)
+{
+	complexE sum;
+
+	sum.z = pow(z * z + B.z * B.z + 2 * z * B.z * cos(f - B.f), 0.5);
+	sum.f = atan((B.z * sin(B.f) + z * sin(f)) / (z * cos(f) + B.z * cos(B.f)));
+
+	z = sum.z;
+	f = sum.f;
+
+	return *this;
+}
+
+complexE complexE::operator-=(complexE B)
+{
+	complexE diff;
+
+	diff.z = pow(z * z + B.z * B.z - 2 * z * B.z * cos(f - B.f), 0.5);
+	diff.f = atan((B.z * sin(B.f) - z * sin(f)) / (z * cos(f) - B.z * cos(B.f)));
+
+	z = diff.z;
+	f = diff.f;
 
 	return *this;
 }

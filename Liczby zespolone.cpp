@@ -5,12 +5,11 @@ int main()
 	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
 	complexE Y, Z(3, 3), sumaE(3, 0);
 
-	sumaA = A * B;
-
-	Y = A; 
+	Y = A;
 	Z = B;
 
-	sconv = Y *= Z;
+	sumaA = A += B;
+	sconv = Y + Z;
 
 	std::cout << sumaA.show() << '\n' << sconv.show() << "\n\n";
 

@@ -8,8 +8,8 @@ int main()
 	Y = A;
 	Z = B;
 
-	sumaA = A -= B;														// sprawdzic mnozenie i dzielenie
-	sconv = sumaE = ~(Y -= Z);
+	sumaA = A -= B;
+	sconv = sumaE = ~(Y * Z);
 
 	std::cout << sumaA.show() << '\n' << sconv.show() << '\n' << sumaE.show() << "\n\n";
 

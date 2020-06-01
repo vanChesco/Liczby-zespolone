@@ -71,16 +71,24 @@ complexA complexA::operator*=(complexA A)
 {
 	complexA mlt(r, i);
 
-	r = A.r * r - A.i * i;
-	i = A.i * r + A.r * i;
+	mlt.r = A.r * r - A.i * i;
+	mlt.i = A.i * r + A.r * i;
+
+	r = mlt.r;
+	i = mlt.i;
 
 	return *this;
 }
 
 complexA complexA::operator/=(complexA A)
 {
-	r = (r * A.r + i * A.i) / (A.r * A.r + A.i * A.i);
-	i = (i * A.r - r * A.i) / (A.r * A.r + A.i * A.i);
+	complexA div;
+
+	div.r = (r * A.r + i * A.i) / (A.r * A.r + A.i * A.i);
+	div.i = (i * A.r - r * A.i) / (A.r * A.r + A.i * A.i);
+
+	r = div.r;
+	i = div.i;
 
 	return *this;
 }
@@ -153,6 +161,7 @@ complexE complexE::operator~()																	// operator zawezajacy zakres faz
 	
 	rng.z = z;
 	rng.f = fmod(f, (2*M_PI));
+	if (rng.f < 0) rng.f += 2 * M_PI;
 
 	return rng;
 }
@@ -200,7 +209,7 @@ complexE complexE::operator-(complexE B)
 	complexE diff;
 
 	diff.z = pow(z * z + B.z * B.z - 2 * z * B.z * cos(f - B.f), 0.5);
-	diff.f = atan((B.z * sin(B.f) - z * sin(f)) / (z * cos(f) - B.z * cos(B.f)));
+	diff.f = atan((z * sin(f) - B.z * sin(B.f)) / (z * cos(f) - B.z * cos(B.f)));
 
 	return diff;
 }
@@ -249,7 +258,7 @@ complexE complexE::operator-=(complexE B)
 	complexE diff;
 
 	diff.z = pow(z * z + B.z * B.z - 2 * z * B.z * cos(f - B.f), 0.5);
-	diff.f = atan((B.z * sin(B.f) - z * sin(f)) / (z * cos(f) - B.z * cos(B.f)));
+	diff.f = atan((z * sin(f) - B.z * sin(B.f)) / (z * cos(f) - B.z * cos(B.f)));
 
 	z = diff.z;
 	f = diff.f;
@@ -259,5 +268,5 @@ complexE complexE::operator-=(complexE B)
 
 std::string complexE::show()
 {
-	return std::to_string(float(z)) + "e^" + std::to_string((float)f) + "i";
+	return std::to_string(z) + "e^" + std::to_string(f) + "i" + "\t=> " + std::to_string(float(f*180/M_PI));
 }

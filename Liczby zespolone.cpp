@@ -2,16 +2,16 @@
 
 int main()
 {
-	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
+	complexA A(8, -14), B(4, 5), sumaA(2, 0), sconv;
 	complexE Y, Z(3, 3), sumaE(3, 0);
 
 	Y = A;
 	Z = B;
 
-	sumaA = A *= B;														// sprawdzic mnozenie i dzielenie
-	sconv = Y * Z;
+	sumaA = A -= B;														// sprawdzic mnozenie i dzielenie
+	sconv = sumaE = ~(Y -= Z);
 
-	std::cout << sumaA.show() << '\n' << sconv.show() << "\n\n";
+	std::cout << sumaA.show() << '\n' << sconv.show() << '\n' << sumaE.show() << "\n\n";
 
 
 

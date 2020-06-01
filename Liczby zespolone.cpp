@@ -1,17 +1,113 @@
 ﻿#include "Complex.h"
 
+
+std::ostream& operator<<(std::ostream& do_cout, complexA& value)
+{
+	do_cout << std::to_string(value.r);
+	if (value.i < 0) do_cout << " - " << std::to_string(-value.i) << "i";
+	else do_cout << " + " << std::to_string(value.i) << "i";
+
+	return do_cout;
+}
+
+complexA operator+(complexA A, complexA B)														//todo Przeladowanie operatora dodawania
+{
+	complexA sum;
+
+	sum.r = A.r + B.r;
+	sum.i = A.i + B.i;
+
+	return sum;
+}
+
+complexA operator-(complexA A, complexA B)														//todo Przeladowanie operatora dodawania
+{
+	complexA diff;
+
+	diff.r = A.r - B.r;
+	diff.i = A.i - B.i;
+
+	return diff;
+}
+
+complexA operator*(complexA A, complexA B)														//todo Przeladowanie operatora mnozenia
+{
+	complexA mlt;
+
+	mlt.r = A.r * B.r - A.i * B.i;
+	mlt.i = A.i * B.r + A.r * B.i;
+
+	return mlt;
+}
+
+complexA operator/(complexA A, complexA B)														//todo Przeladowanie operatora dzielenia
+{
+	complexA div;
+
+	div.r = (A.r * B.r + A.i * B.i) / (B.r * B.r + B.i * B.i);
+	div.i = (A.i * B.r - A.r * B.i) / (B.r * B.r + B.i * B.i);
+
+	return div;
+}
+
+
+std::ostream& operator<<(std::ostream& do_cout, complexE& value)
+{
+	do_cout << std::to_string(float(value.z)) << "e^" << std::to_string((float)(value.f)) << "i" << " (" << value.f * 180 / M_PI << "*)";
+
+	return do_cout;
+}
+
+complexE operator+(complexE A, complexE B)
+{
+	complexE sum;
+
+	sum.z = pow(A.z * A.z + B.z * B.z + 2 * A.z * B.z * cos(A.f - B.f), 0.5);
+	sum.f = atan((B.z * sin(B.f) + A.z * sin(A.f)) / (A.z * cos(A.f) + B.z * cos(B.f)));
+
+	return sum;
+}
+
+complexE operator-(complexE A, complexE B)
+{
+	complexE diff;
+
+	diff.z = pow(A.z * A.z + B.z * B.z - 2 * A.z * B.z * cos(A.f - B.f), 0.5);
+	diff.f = atan((B.z * sin(B.f) - A.z * sin(A.f)) / (A.z * cos(A.f) - B.z * cos(B.f)));
+
+	return diff;
+}
+
+complexE operator*(complexE A, complexE B)
+{
+	complexE mlt;
+
+	mlt.z = A.z * B.z;
+	mlt.f = A.f + B.f;
+
+	return mlt;
+}
+
+complexE operator/(complexE A, complexE B)
+{
+	complexE div;
+
+	div.z = A.z / B.z;
+	div.f = A.f - B.f;
+
+	return div;
+}
+
 int main()
 {
-	complexA A(8, 14), B(4, 5), sumaA(2, 0), sconv;
-	complexE Y, Z(3, 3), sumaE(3, 0);
+	complexA A(8, -14), B(4, 5), sumaA(2, 0), sconv;
+	complexE Y, Z(3, -3000*M_PI/180), sumaE(3, 99);
 
-	Y = A;
-	Z = B;
+	sumaE =  Z * (complexE)2.0f;
 
-	sumaA = A *= B;														// sprawdzic mnozenie i dzielenie
-	sconv = Y * Z;
+	Z = ~Z;
 
-	std::cout << sumaA.show() << '\n' << sconv.show() << "\n\n";
+	std::cout << Z << '\n';
 
 
 

@@ -33,24 +33,20 @@ public:
 
 	complexA(void);														// Konstruktor domyslny
 	complexA(double R, double I);										// Zwykly konstruktor obiektu klasy complex (liczba zespolona)
-	complexA(double R);													// todo Konstruktor konwerujacy typ double do typu complex - dzieki temu mozliwe jest rzutowanie typu
+	//complexA(double R);													// todo Konstruktor konwerujacy typ double do typu complex - dzieki temu mozliwe jest rzutowanie typu
 	complexA(const complexE& AA);										// Konstruktor konwertujacy postac wykladnicza do algebraicznej
 	~complexA();
 
+	operator int();
+	operator float();
 	operator double();													// todo Funkcja konwertujaca do typu wbudowanego
 
-	complexA operator+(complexA B);										// Przeladowanie operatora dodawania
-	complexA operator-(complexA B);										// Przeladowanie operatora odejmowania
-	complexA operator*(complexA B);										// Przeladowanie operatora mnozenia
-	complexA operator/(complexA B);										// Przeladowanie operatora dzielenia
 	complexA operator!();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona)
 	complexA operator*=(complexA A);									// Przeladowanie operatora *=
 	complexA operator/=(complexA A);									// Przeladowanie operatora /=
 	complexA operator+=(complexA A);									// Przeladowanie operatora +=
 	complexA operator-=(complexA A);									// Przeladowanie operatora -=
 	complexA operator=(complexA A);										// Operator przypisania (wielokrotnego - A=B=C=D dzieki zwracanemu obiektowi wskaznikiem *this)
-
-	std::string show();													// Funkcja zwracajaca liczbe w postaci tekstowej
 };
 
 
@@ -72,12 +68,10 @@ public:
 	complexE(const complexA& A);										// Konstruktor konwertujacy postac algebraiczna do wykladniczej
 	~complexE();
 
+	operator int();
+	operator float();
 	operator double();
 
-	complexE operator+(complexE B);										// Przeladowanie operatora sumy
-	complexE operator-(complexE B);										// Przeladowanie operatora roznicy
-	complexE operator*(complexE B);										// Przeladowanie operatora iloczynu
-	complexE operator/(complexE B);										// Przeladowanie operatora ilorazu
 	complexE operator^(double p);										// Przeladowanie operatora potegi dla liczby zespolonej
 	complexE operator!();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona)
 	complexE operator~();												// Przeladowanie operatora negacji (w obecnej sytuacji zwraca on liczbe sprzezona z ograniczeniem kata do zakresu 0-2pi)
@@ -86,6 +80,4 @@ public:
 	complexE operator+=(complexE A);									// Przeladowanie operatora *=
 	complexE operator-=(complexE A);									// Przeladowanie operatora /=
 	complexE operator=(complexE A);										// Przeladowanie operatora przypisania (operator w zasadzie moglby byc void, bo i tak zapisuje zmiany bezposrednio w skladnikach obiektu, ale dzieki sprecyzowaniu typu, mozna od razu zwrocic obiekt wskaznikim *this)
-
-	std::string show();													// Funkcja zwracajaca liczbe w postaci tekstowej
 };

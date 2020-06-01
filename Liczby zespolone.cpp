@@ -104,7 +104,7 @@ int main()
 	complexE Y, Z(3, -3000*M_PI/180), sumaE(3, 99);
 
 	sumaE =  Z * (complexE)2.0f;
-
+	
 	Z = ~Z;
 
 	std::cout << Z << '\n';

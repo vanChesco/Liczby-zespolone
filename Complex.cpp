@@ -8,7 +8,7 @@
 
 complexA::complexA(void) : r(0), i(0) {}
 complexA::complexA(double R, double I) : r(R), i(I) {}
-//complexA::complexA(double R) : r(R), i(0) {}
+complexA::complexA(double R) : r(R), i(0) {}
 complexA::complexA(const complexE& AA) : r(AA.z * cos(AA.f)), i(AA.z * sin(AA.f)) {}
 complexA::~complexA() {}
 
@@ -27,7 +27,7 @@ complexA::operator double()
 	return (double)r;
 }
 
-complexA complexA::operator!()																	//todo operator zwracajacy liczbe sprzezona
+complexA complexA::operator!()																	// operator zwracajacy liczbe sprzezona
 {
 	complexA bnd;
 
@@ -107,7 +107,7 @@ complexE::operator double()
 	return (double)z;
 }
 
-complexE complexE::operator!()																	//todo operator zwracajacy liczbe sprzezona
+complexE complexE::operator!()																	// operator zwracajacy liczbe sprzezona
 {
 	complexE bnd;
 
@@ -127,15 +127,15 @@ complexE complexE::operator~()																	// operator zawezajacy zakres faz
 	return rng;
 }
 
-complexE complexE::operator=(complexE A)
+complexE complexE::operator=(complexE A)														// Operator przypisania
 {
 	z = A.z;
 	f = A.f;
 
-	return *this;									// dzieki temu zwracaniu wartosci, mozliwe jest wykonanie operacji wielokrotnego przypisania A=B=C=D
+	return *this;									// dzieki temu zwracaniu wartosci mozliwe jest wykonanie operacji wielokrotnego przypisania A=B=C=D
 }
 
-complexE complexE::operator^(double n)
+complexE complexE::operator^(double n)															// Operator potegowania
 {
 	complexE pwr;
 

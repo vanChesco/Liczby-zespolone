@@ -33,7 +33,7 @@ public:
 
 	complexA(void);														// Konstruktor domyslny
 	complexA(double R, double I);										// Zwykly konstruktor obiektu klasy complex (liczba zespolona)
-	//complexA(double R);													// todo Konstruktor konwerujacy typ double do typu complex - dzieki temu mozliwe jest rzutowanie typu
+	complexA(double R);													// todo Konstruktor konwerujacy typ double do typu complex - dzieki temu mozliwe jest rzutowanie typu
 	complexA(const complexE& AA);										// Konstruktor konwertujacy postac wykladnicza do algebraicznej
 	~complexA();
 

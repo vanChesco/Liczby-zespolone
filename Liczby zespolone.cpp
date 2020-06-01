@@ -1,7 +1,7 @@
 ﻿#include "Complex.h"
 
 
-std::ostream& operator<<(std::ostream& do_cout, complexA& value)
+std::ostream& operator<<(std::ostream& do_cout, complexA& value)								// Przeladowanie operatora << klasy ostream dla postaci algebraicznej
 {
 	do_cout << std::to_string(value.r);
 	if (value.i < 0) do_cout << " - " << std::to_string(-value.i) << "i";
@@ -10,7 +10,7 @@ std::ostream& operator<<(std::ostream& do_cout, complexA& value)
 	return do_cout;
 }
 
-complexA operator+(complexA A, complexA B)														//todo Przeladowanie operatora dodawania
+complexA operator+(complexA A, complexA B)														// Przeladowanie operatora dodawania
 {
 	complexA sum;
 
@@ -20,7 +20,7 @@ complexA operator+(complexA A, complexA B)														//todo Przeladowanie ope
 	return sum;
 }
 
-complexA operator-(complexA A, complexA B)														//todo Przeladowanie operatora dodawania
+complexA operator-(complexA A, complexA B)														// Przeladowanie operatora dodawania
 {
 	complexA diff;
 
@@ -30,7 +30,7 @@ complexA operator-(complexA A, complexA B)														//todo Przeladowanie ope
 	return diff;
 }
 
-complexA operator*(complexA A, complexA B)														//todo Przeladowanie operatora mnozenia
+complexA operator*(complexA A, complexA B)														// Przeladowanie operatora mnozenia
 {
 	complexA mlt;
 
@@ -40,7 +40,7 @@ complexA operator*(complexA A, complexA B)														//todo Przeladowanie ope
 	return mlt;
 }
 
-complexA operator/(complexA A, complexA B)														//todo Przeladowanie operatora dzielenia
+complexA operator/(complexA A, complexA B)														// Przeladowanie operatora dzielenia
 {
 	complexA div;
 
@@ -51,7 +51,7 @@ complexA operator/(complexA A, complexA B)														//todo Przeladowanie ope
 }
 
 
-std::ostream& operator<<(std::ostream& do_cout, complexE& value)
+std::ostream& operator<<(std::ostream& do_cout, complexE& value)								// Przeladowanie operatora << klasy ostream dla postaci wykladniczej
 {
 	do_cout << std::to_string(float(value.z)) << "e^" << std::to_string((float)(value.f)) << "i" << " (" << value.f * 180 / M_PI << "*)";
 
@@ -97,6 +97,12 @@ complexE operator/(complexE A, complexE B)
 
 	return div;
 }
+
+
+/// <summary>
+/// PROGRAM GLOWNY
+/// </summary>
+/// <returns></returns>
 
 int main()
 {

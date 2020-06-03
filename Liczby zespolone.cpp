@@ -98,22 +98,22 @@ complexE operator/(complexE A, complexE B)
 	return div;
 }
 
-
-/// <summary>
-/// PROGRAM GLOWNY
-/// </summary>
-/// <returns></returns>
+/// --------------- \\\\\\\\\\
+/// PROGRAM GLOWNY  \\\\\\\\\\
+/// --------------- \\\\\\\\\\
 
 int main()
 {
 	complexA A(8, -14), B(4, 5), sumaA(2, 0), sconv;
 	complexE Y, Z(3, -3000*M_PI/180), sumaE(3, 99);
 
-	sumaE =  Z * (complexE)2.0f;
+	sumaE =  (complexE)2.0f *Z;
 	
-	Z = ~Z;
+	Z = !~Z;
 
 	std::cout << Z << '\n';
+
+
 
 
 
